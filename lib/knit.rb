@@ -20,18 +20,30 @@ module Knit
        end
      end
     end
+
+    def knit!(other)
+      self.replace(self.knit(other))
+    end
   end
 
   module Array
     def knit(other)
-      knit = ([self]+[other]).flatten(1)
-      knit = knit.partition{|obj| obj.is_a?(Hash)}
-      knit = [knit[1],knit[0].reduce{|a,b| a.knit(b)}].flatten(1)
+      unless other.respond_to? :keys
+        knit = self+[other].flatten(1)
+      else
+        knit = ([self]+[other]).flatten(1)
+        knit = knit.partition{|obj| obj.is_a?(Hash)}
+        knit = [knit[1],knit[0].reduce{|a,b| a.knit(b)}].flatten(1)
+      end
       if block_given?
         yield knit
       else
         knit
       end
+    end
+
+    def knit!(other)
+      self.replace(self.knit(other))
     end
   end
 end
