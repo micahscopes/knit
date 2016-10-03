@@ -5,11 +5,17 @@ require 'rake/clean'
 Bundler.require
 
 RSpec.describe Knit do
-  example "merge hashes" do
+  example "knit hashes" do
     a = {1=>2,2=>3}
     b = {2=>4,3=>5}
     c = {1=>2, 2=>[3, 4], 3=>5}
     expect(a.knit(b)).to eq(c)
   end
 
+  example "knit arrays" do
+    a = [1,2,3]
+    b = [4,5]
+    c = [1,2,3,4,5]
+    expect(a.knit(b)).to eq(c)
+  end
 end

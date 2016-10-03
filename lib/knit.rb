@@ -32,7 +32,7 @@ module Knit
   module Array
     def knit(other)
       unless other.respond_to? :keys
-        knit = self+[other].flatten(1).map{|a| a.to_h if a.respond_to? :keys}
+        knit = self+[other].flatten(1).map{|x|  x.respond_to?(:keys) ? x.to_h : x}
       else
         other = other.to_h
         knit = ([self]+[other]).flatten(1) #.map{|a| a.to_h if a.respond_to? :keys}
