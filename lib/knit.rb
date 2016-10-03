@@ -55,5 +55,7 @@ module Knit
   end
 end
 
+# todo: implement for Set objects
+
 Hash.include Knit::Hash
 Array.include Knit::Array
