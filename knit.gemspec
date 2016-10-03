@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Micah"]
   spec.email         = ["fitchmicah@gmail.com"]
 
-  spec.summary       = %q{Deep merging for hashes...}
+  spec.summary       = %q{Deep merging for hashes and arrays...}
   spec.homepage      = "http://github.com/micahscopes/knit/"
   spec.license       = "MIT"
   # spec.allowed_push_host = true
