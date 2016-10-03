@@ -18,4 +18,12 @@ RSpec.describe Knit do
     c = [1,2,3,4,5]
     expect(a.knit(b)).to eq(c)
   end
+
+  example "knit hash into array" do
+    expect(  [1].knit({2=>3})  ).to eq(  [1,{2=>3}]  )
+  end
+
+  example "knit array into hash" do
+    expect(  {1 => 2}.knit([3])  ).to eq(  [{1=>2},3]  )
+  end
 end

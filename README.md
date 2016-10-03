@@ -21,7 +21,7 @@ For example:
 
 ## Contributing
 
-Do you have a better way?  Objections?  Fork away!
+Do you have a better way?  Objections even?  Fork away!
 
 ## License
 

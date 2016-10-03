@@ -5,7 +5,7 @@ module Knit
     public
     def knit(other)
      return self if other == nil
-     return other.knit(self) if !other.respond_to?(:keys)
+     return other.knit(self, true) if !other.respond_to?(:keys)
      self.merge(other) do |key, a, b|
        knit = a if b.is_a? NilClass
        knit = b if a.is_a? NilClass
@@ -30,14 +30,17 @@ module Knit
   end
 
   module Array
-    def knit(other)
+    def knit(other,reverse=false)
       unless other.respond_to? :keys
+        knit = reverse ? [other]+self : self+[other]
         knit = self+[other].flatten(1).map{|x|  x.respond_to?(:keys) ? x.to_h : x}
       else
         other = other.to_h
         knit = ([self]+[other]).flatten(1) #.map{|a| a.to_h if a.respond_to? :keys}
         knit = knit.partition{|obj| obj.respond_to? :keys}
-        knit = [knit[1],knit[0].reduce{|a,b| a.knit(b)}].flatten(1)
+        knit = [knit[1],knit[0].reduce{|a,b| a.knit(b)}]
+        knit.reverse! if reverse
+        knit = knit.flatten(1)
       end
       if block_given?
         yield knit
